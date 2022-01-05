@@ -1,0 +1,72 @@
+<div class="selector" *ngIf="!isforgottenPassword; then login else forgottenPassword"></div>
+
+<div class="red bubble big-bubble" style="top: 5%; left: 5%; animation: bubble1 120s infinite ;"></div>
+<div class="green bubble medium-bubble" style="top: -10%; right: 40%; animation: bubble2 150s linear infinite;"></div>
+<div class="yellow bubble medium-bubble" style="top: 30%; right: 10%; animation: bubble3 130s linear infinite;"></div>
+<div class="green bubble small-bubble" style="right: 10%; top: 70vh; animation: bubble4 140s linear infinite;"></div>
+<div class="red bubble small-bubble" style="left: 33%; top: 70vh; animation: bubble4 135s linear infinite;"></div>
+<div class="yellow bubble big-bubble" style="left: 25vw; top: 10%; animation: bubble3 180s linear infinite;"></div>
+<div class="green bubble small-bubble" style="left: 40%; top: 0; animation: bubble6 200s linear infinite;"></div>
+<div class="yellow bubble small-bubble" style="top: -10%; left: -10%; animation: bubble5 180s linear infinite;"></div>
+<div class="red bubble medium-bubble" style="top: 60vh; right: 25%; animation: bubble3,150s linear infinite;"></div>
+
+
+
+<ng-template #login>
+    <div class="login-wrapper">
+        <div class="illustration">
+            <img src="../../assets/online-communication-2663352-2207698.png" alt="">
+            <p>Send messages <br>anywhere !</p>
+        </div>
+        <div class="login-structure">
+            <div class="login-head" onload="changeBackground();">
+                <h1>Login</h1>
+            </div>
+            <form action="post" class="login-form">
+                <input type="tel" name="phone-number" placeholder="Phone Number"><br>
+                <input type="password" name="password" placeholder="Password">
+                <br>
+                <input type="submit" name="Login" value="Login" >
+            </form>
+            <p>OR</p>
+            <div class="alternatives">
+                <a href="createAccount.html">Create account</a>
+                <a href="forgotterPassword.html">Forgotten password ?</a>
+            </div>
+        </div>
+        
+    </div>
+</ng-template>
+
+<ng-template #forgottenPassword>
+    <div class="selector" *ngIf="!isCodeSent; then confirmNumber else confirmCode"></div>
+    <ng-template #confirmNumber>
+        <div class="login-wrapper forgotten-password">
+            <div class="login-structure">
+                <div class="login-head">
+                    <h1>Forgotten password ?</h1>
+                    <p>Enter your phone number, we will send you a verification code.</p>
+                </div>
+                <form action="post" class="login-form">
+                    <input type="tel" name="phone-number" placeholder="Enter your phone number"><br>
+                    <input type="submit" name="Submit" value="Confirm" >
+                </form>
+            </div> 
+        </div>
+    </ng-template>
+    <ng-template #confirmCode>
+        <div class="login-wrapper confirm-code">
+            <div class="login-structure">
+                <div class="login-head">
+                    <h1>We sent a code to <br>
+                    +237 697 765 934</h1>
+                </div>
+                <form action="post" class="login-form">
+                    <input type="tel" name="six-digit-code" placeholder="Enter 6-digit code"><br>
+                    <input type="submit" name="Submit" value="Confirm" >
+                </form>
+            </div> 
+        </div>
+    </ng-template>
+    
+</ng-template>

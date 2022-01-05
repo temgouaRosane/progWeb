@@ -1,0 +1,116 @@
+<link rel="stylesheet" href="../../src/assets/bootstrap-icons-1.5.0/bootstrap-icons.css">
+<link rel="stylesheet" href="../assets/bootstrap.min.css">
+<div class="selector" *ngIf="!param.correctPassword; then loginForm else smsInbox"></div>
+<ng-template #loginForm>
+    <app-login-form></app-login-form>
+</ng-template>
+<ng-template #smsInbox>
+    <div class="wrapper" >
+        <div class="new-chat-wrapper">
+            <div class="new-chat-form">
+                <div class="new-chat-header">
+                    <div class="back" (click)="closeForm();"><i class="bi bi-arrow-left"></i>Back</div>
+                    <h1>Start a new chat</h1>
+                    <textarea name="new-chat-search" 
+                    id="new-chat-search"
+                    placeholder="Search contact"
+                    rows="1"></textarea>
+                </div>
+                <div class="contact-list" style="height: 70vh; overflow: auto;">
+                        <app-discussion-thread *ngFor="let a of contact" 
+                        name="{{a.name}}" 
+                        lastMessage="{{a.phoneNumber}}" 
+                        style="transform: scale(0.75);">
+                        </app-discussion-thread>
+                </div>
+            </div>
+        </div>
+
+
+
+        <nav class="navigation-bar">
+            <img src="../assets/profile.6bcc1092ab3a.png" alt="">
+            <div class="nav-head" onload="changeBackground();">
+                <h1>{{account.name}}</h1>
+                <h2>{{account.phoneNumber}}</h2>
+            </div>
+            <li 
+                [ngClass]="{'active' : param.isConversation}"
+                (click)="param.isContactList = false; param.isConversation = true;"><i class="bi bi-chat-left-text"></i> Conversations <span class="sms-counter">99+</span></li>
+            <li><i class="bi bi-pencil-square"></i> Drafts</li>
+            <li 
+                [ngClass]="{'active' : param.isContactList}"
+                (click)="param.isContactList = true; param.isConversation = false;"><i class="bi bi-people"></i> Contacts</li>
+            <li><i class="bi bi-gear"></i> Options</li>
+            <li
+                (click)="param.correctPassword = false;"><i class="bi bi-box-arrow-right"></i> Log out</li>
+        </nav>
+
+
+
+        <div class="discussion-page" *ngIf="param.isConversation">
+            <div class="new-chat" (click)="newChatForm();"><i class="bi bi-chat-left-text"></i>New chat</div>
+            <div class="discussions" id="discussion">
+                <app-contact-header></app-contact-header>
+                <div class="chat-list">
+                    <app-discussion-thread *ngFor="let a of contact" name="{{a.name}}" lastMessage="{{a.lastMessage}}" (click)="selectContact(a.name,a.phoneNumber,a.discussion)">
+                    </app-discussion-thread>
+                </div>
+            </div>
+            <div class="conversation">
+                <app-discussion-header name="{{selectedName}}" PhoneNumber="{{selectedPhoneNumber}}"></app-discussion-header>
+                <div class="message-bubbles">
+                    <div class="gradient"></div>
+                    <div class="sms" 
+                        *ngFor="let message of messages" 
+                        [ngClass]="{'received' : message.type === 'received'}" 
+                        [ngClass]="{'sent' : message.type === 'sent'}">
+                        <div class="selector" 
+                            *ngIf="message.type === 'sent'">
+
+                            {{message.content}}
+
+                        </div>
+                        <div class="selector" 
+                        *ngIf="message.type === 'received';">
+
+                            {{message.content}}
+
+                        </div>
+                    </div>
+                </div>
+                <form class="text-message-input" (submit)="sendMessage()">
+                    <textarea 
+                        name="message" 
+                        id="message" 
+                        placeholder="Enter your message" 
+                        [(ngModel)]="message"></textarea>
+                    <button class="send-message" type="submit" ><i class="bi-arrow-up-circle"></i> Send</button>
+                </form>
+            </div>
+        </div>
+        <div class="selector"  *ngIf="param.isContactList" style="width: fit-content;">
+            <app-contact-list user="{{user}}"></app-contact-list>
+            <div class="add-contact-button" (click)="newContactForm();">Add contact</div>
+            <div class="add-contact-wrapper">
+                <form class="add-contact-form">
+                <h1>Add a new contact</h1>
+                    <input type="text" placeholder="First Name" name="firstNameC" [(ngModel)]="firstNameC">
+                    <input type="text" placeholder="Last Name" name="lastNameC" [(ngModel)]="lastNameC">
+                    <input type="tel" name="phoneNumber" [(ngModel)]="phoneNumberC" placeholder="Phone number">
+                    <div class="buttons">
+                        <input 
+                            type="submit" 
+                            class="create-contact"
+                            value="Create"
+                            (click)="createcontact();">
+                        <input type="reset" 
+                            class="cancel" 
+                            value="Cancel"
+                            (click)="closeContactForm();">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template>

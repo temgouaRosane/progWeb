@@ -1,0 +1,225 @@
+::ng-deep *{
+    margin: 0;
+    padding: 0;
+    --color1 : #bbb;
+    --font1 : 'Montserrat Light';
+}
+@font-face {
+    font-family: "bootstrap-icons";
+    src: url("../assets/bootstrap-icons-1.5.0/fonts/bootstrap-icons.woff") format("woff"),
+    url("../assets/bootstrap-icons-1.5.0/fonts/bootstrap-icons.woff2") format("woff2");
+}
+.wrapper{
+    display: flex;
+    height: 100vh;
+    font-family: var(--font1);
+}
+.discussion-page{
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    height: 100vh;
+    box-sizing: border-box;
+}
+app-navigation-bar{
+    width: 20vw;
+}
+.chat-list{
+    overflow-x: hidden;
+    height: 100vh;
+}
+.discussions{
+    position: relative;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 27vw;
+    height: 100vh;
+}
+.conversation{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-width: 40vw;
+    position: relative;
+    flex-grow: 2;
+    max-height: 100vh;
+    overflow: auto;
+    box-sizing: border-box;
+}
+#message{
+    box-sizing: border-box;
+    background-color: white;
+    height: 2.5em;
+    padding: .5em 1em;
+    font-size: 1em;
+    border-radius: 50vw;
+    outline: none;
+    border: 1px solid white;
+    box-shadow: -3px -3px 6px #fafbff, 3px 3px 6px #161b1d3b;
+    flex-grow: 2;
+    font: 1.1em Montserrat;
+    resize: none;
+    transition: all .3s ease;
+}
+#message:focus{
+    border: solid 1px #bbb;
+    box-shadow: none;
+}
+.send-message{
+    padding: .5em 1em;
+    margin: .5em;
+    border-radius: 50vw;
+    color: white;
+    background-color: #fda300;
+    font: 1.1em Montserrat;
+    width: fit-content;
+    box-shadow: -3px -3px 6px #fafbff, 3px 3px 6px #161b1d3b;
+    transition: all .3s ease;
+    cursor:pointer;
+    outline: none;
+    border: 1px solid #fda300;
+}
+.send-message:active{
+    transform: scale(0.9);
+}
+.send-message::selection{
+    background-color: #0000;
+}
+.message-bubbles{
+    width: 100%;
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+.text-message-input{
+    display: flex;
+    align-items: center;
+    padding: .3em 1em;
+    background-color: #f5f5f5;
+    z-index: 2;
+}
+
+.message-bubbles{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding:  1em 0;
+    background-color: white;
+}
+
+
+.sms{
+    padding: .75em;
+    font-size: .9em;
+    margin: .05em 1em;
+    border-radius: 1.5em;
+    width: fit-content;
+    max-width: 450px;
+    min-width: 4em;
+    background-color: #eee;
+    animation: message .3s linear 1 ;
+
+}
+@keyframes message {
+    0%{height: 0px;}
+    100%{height: fit-content;}
+}
+.message-bubbles .sent{
+    align-self: flex-end;
+    color: white;
+    background-color: #000;
+}
+.message-bubbles .received{
+    position: relative;
+    z-index: 2;
+}
+.gradient{
+    position: absolute;
+    top: 0;
+    background: linear-gradient(#03033d,#47473a,#361a23, #570653);
+    width: 100%;
+    height: 110%;
+    mix-blend-mode: screen;
+    z-index: 0;
+    pointer-events: none;
+}
+.sms{
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.new-chat{
+    position: absolute;
+    left: 17vw;
+    bottom: 3vw;
+    box-sizing: border-box;
+
+    background-color: #fda300;
+    border: solid 1px #fda300;
+    color: white;
+    border-radius: 50vw;
+
+    box-shadow: 5px 5px 10px #161b1d3b;
+    padding: .8em;
+    z-index: 3;
+
+    cursor: default;
+
+}
+.new-chat:active{
+    transform: scale(.9);
+}
+.new-chat-wrapper{
+    visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+
+    background-color: #0008;
+}
+.new-chat-form{
+    width: 35%;
+    background-color: #ffffff88;
+    backdrop-filter: blur(15px);
+    border-radius: 1.5em;
+    position: relative;
+    z-index: 101;
+}
+@keyframes popup {
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+.new-chat-header{
+    padding: 1.5em;
+}
+#new-chat-search{
+    font-family: 'Montserrat Light';
+    flex-grow: 1;
+    box-sizing: border-box;
+    min-height: 2.2em;
+    min-width: 45%;
+    width: 100%;
+    padding: .5em 1em;
+    font-size: .8em;
+    border-radius: 50vw;
+    border: 1px solid white;
+    box-shadow: 3px 3px 6px #161b1d3b;
+    outline: none;
+    transition: all .3s ease;
+    resize: none;
+}
+#new-chat-search:focus{
+    border: solid 1px #bbb;
+    box-shadow: none;
+}
+.new-chat-header h1{
+    color: white;
+    text-shadow: 6px 6px 12px rgb(70, 70, 70);
+    margin: 0.2em 0 .5em 0;
+    font-size: 2em;
+}

@@ -1,0 +1,6 @@
+<div class="contacts">
+    <app-contact-header></app-contact-header>
+    <div class="contact-list">
+        <app-contact-item *ngFor="let c of contact" name="{{c.name}}" phoneNumber="{{c.phoneNumber}}"></app-contact-item>
+    </div>
+</div>

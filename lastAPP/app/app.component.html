@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="../../src/assets/bootstrap-icons-1.5.0/bootstrap-icons.css">
+<link rel="stylesheet" href="../assets/bootstrap.min.css">
+<div class="selector" *ngIf="!correctPassword; then loginForm else smsInbox"></div>
+<ng-template #loginForm>
+    <app-login-form></app-login-form>
+</ng-template>
+<ng-template #smsInbox>
+    <div class="wrapper" >
+        <div class="new-chat-wrapper" (click)="closeForm();">
+            <div class="new-chat-form">
+                <div class="new-chat-header">
+                    <h1>Start a new chat</h1>
+                    <textarea name="new-chat-search" 
+                    id="new-chat-search"
+                    placeholder="Search contact"
+                    rows="1"></textarea>
+                </div>
+                <div class="contact-list" style="height: 70vh; overflow: auto;">
+                        <app-discussion-thread *ngFor="let a of contact" 
+                        name="{{a.name}}" 
+                        lastMessage="{{a.phoneNumber}}" 
+                        style="transform: scale(0.75);">
+                        </app-discussion-thread>
+                </div>
+            </div>
+        </div>
+
+
+        
+        <app-navigation-bar></app-navigation-bar>
+
+
+
+        <div class="discussion-page" *ngIf="isConversation">
+            <div class="new-chat" (click)="newChatForm();">New chat</div>
+            <div class="discussions" id="discussion">
+                <app-contact-header></app-contact-header>
+                <div class="chat-list">
+                    <app-discussion-thread *ngFor="let a of contact" name="{{a.name}}" lastMessage="{{a.lastMessage}}" (click)="selectContact(a.name,a.phoneNumber,a.discussion)">
+                    </app-discussion-thread>
+                </div>
+            </div>
+            <div class="conversation">
+                <app-discussion-header name="{{selectedName}}" PhoneNumber="{{selectedPhoneNumber}}"></app-discussion-header>
+                <div class="message-bubbles">
+                    <div class="gradient"></div>
+                    <div class="sms" 
+                        *ngFor="let message of messages" 
+                        [ngClass]="{'received' : message.type === 'received'}" 
+                        [ngClass]="{'sent' : message.type === 'sent'}">
+                        <div class="selector" 
+                            *ngIf="message.type === 'sent'">
+
+                            {{message.content}}
+
+                        </div>
+                        <div class="selector" 
+                        *ngIf="message.type === 'received';">
+
+                            {{message.content}}
+
+                        </div>
+                    </div>
+                </div>
+                <form class="text-message-input" (submit)="sendMessage()">
+                    <textarea 
+                        name="message" 
+                        id="message" 
+                        placeholder="Enter your message" 
+                        [(ngModel)]="message"></textarea>
+                    <button class="send-message" type="submit" >Send</button>
+                </form>
+            </div>
+        </div>
+        <app-contact-list *ngIf="isContactList"></app-contact-list>
+    </div>
+</ng-template>

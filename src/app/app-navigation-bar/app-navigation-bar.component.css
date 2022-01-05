@@ -1,0 +1,50 @@
+@font-face {
+    font-family: "bootstrap-icons";
+    src: url("../../assets/bootstrap-icons-1.5.0/fonts/bootstrap-icons.woff") format("woff"),
+    url("../../assets/bootstrap-icons-1.5.0/fonts/bootstrap-icons.woff2") format("woff2");
+}
+.navigation-bar{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: auto;
+    z-index: 2;
+    background-color: rgb(0, 0, 20);
+    color: white;
+    height: 100%;
+}
+.navigation-bar a{
+    padding: 1em 2rem;
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+}
+.navigation-bar a:visited{
+    color: inherit;
+}
+.navigation-bar h1{
+    font-size: 1.2em;
+    margin: 1em 2rem;
+}
+.navigation-bar h2{
+    font-size: .9em;
+    margin: 0 2rem 3em;
+}
+.navigation-bar a.active{
+    background-color: white;
+    color: rgb(0, 0, 20);
+    font-weight: bolder;
+}
+.sms-counter{
+    font-size: .8em;
+    border-radius: 50vw;
+    font-weight: bolder;
+    position: absolute;
+    background-color: #fc7643;
+    padding: .3em;
+    right: 2rem;
+}
+.navigation-bar i{
+    font-size: 1em;
+    color: inherit;
+}
